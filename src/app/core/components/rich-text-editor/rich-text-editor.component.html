@@ -1,0 +1,9 @@
+@if (controlName && form) {
+    <br>
+    <div style="width: 100%" [formGroup]="form">
+            <textarea class="w-full" [froalaEditor]="editorOptions"
+                      formControlName="{{controlName}}"></textarea>
+    </div>
+} @else {
+    <h5>Failed to initialize editor</h5>
+}

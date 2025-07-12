@@ -1,0 +1,63 @@
+@if (showPreloader) {
+    <div class="fixed inset-0 flex items-center justify-center bg-white bg-opacity-50 z-[9999]" id="overlay"
+         (click)="clickedOnPreloader()">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+             style="margin:auto;background:hwb(0 100% 0% / 0);display:block;" width="200px" height="200px"
+             viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+            <path d="M20 25L80 25L80 75L20 75Z" fill="#abbd81" stroke="#4e5c2e" stroke-width="3"></path>
+
+            <path d="M50 25L80 25L80 75L50 75" fill="#abbd81" stroke="#4e5c2e" stroke-width="3" stroke-linejoin="round"
+                  stroke-linecap="round">
+                <animate attributeName="d" dur="2.5s" repeatCount="indefinite" begin="0s" keyTimes="0;0.5;0.501;1"
+                         values="M50 25L80 25L80 75L50 75;M50 25L50 20L50 80L50 75;M50 25L80 25L80 75L50 75;M50 25L80 25L80 75L50 75">
+                </animate>
+                <animate attributeName="opacity" dur="2.5s" repeatCount="indefinite" begin="0s"
+                         keyTimes="0;0.5;0.5001;1"
+                         values="1;1;0;0"></animate>
+            </path>
+            <path d="M50 25L80 25L80 75L50 75" fill="#abbd81" stroke="#4e5c2e" stroke-width="3" stroke-linejoin="round"
+                  stroke-linecap="round">
+                <animate attributeName="d" dur="2.5s" repeatCount="indefinite" begin="-0.415s" keyTimes="0;0.5;0.501;1"
+                         values="M50 25L80 25L80 75L50 75;M50 25L50 20L50 80L50 75;M50 25L80 25L80 75L50 75;M50 25L80 25L80 75L50 75">
+                </animate>
+                <animate attributeName="opacity" dur="2.5s" repeatCount="indefinite" begin="-0.415s"
+                         keyTimes="0;0.5;0.5001;1" values="1;1;0;0"></animate>
+            </path>
+            <path d="M50 25L80 25L80 75L50 75" fill="#abbd81" stroke="#4e5c2e" stroke-width="3" stroke-linejoin="round"
+                  stroke-linecap="round">
+                <animate attributeName="d" dur="2.5s" repeatCount="indefinite" begin="-0.825s" keyTimes="0;0.5;0.501;1"
+                         values="M50 25L80 25L80 75L50 75;M50 25L50 20L50 80L50 75;M50 25L80 25L80 75L50 75;M50 25L80 25L80 75L50 75">
+                </animate>
+                <animate attributeName="opacity" dur="2.5s" repeatCount="indefinite" begin="-0.825s"
+                         keyTimes="0;0.5;0.5001;1" values="1;1;0;0"></animate>
+            </path>
+            <path d="M50 25L80 25L80 75L50 75" fill="#abbd81" stroke="#4e5c2e" stroke-width="3" stroke-linejoin="round"
+                  stroke-linecap="round">
+                <animate attributeName="d" dur="2.5s" repeatCount="indefinite" begin="-0.825s" keyTimes="0;0.499;0.5;1"
+                         values="M50 25L20 25L20 75L50 75;M50 25L20 25L20 75L50 75;M50 25L50 20L50 80L50 75;M50 25L20 25L20 75L50 75">
+                </animate>
+                <animate attributeName="opacity" dur="2.5s" repeatCount="indefinite" begin="-0.825s"
+                         keyTimes="0;0.4999;0.5;1" values="0;0;1;1"></animate>
+            </path>
+            <path d="M50 25L80 25L80 75L50 75" fill="#abbd81" stroke="#4e5c2e" stroke-width="3" stroke-linejoin="round"
+                  stroke-linecap="round">
+                <animate attributeName="d" dur="2.5s" repeatCount="indefinite" begin="-0.415s" keyTimes="0;0.499;0.5;1"
+                         values="M50 25L20 25L20 75L50 75;M50 25L20 25L20 75L50 75;M50 25L50 20L50 80L50 75;M50 25L20 25L20 75L50 75">
+                </animate>
+                <animate attributeName="opacity" dur="2.5s" repeatCount="indefinite" begin="-0.415s"
+                         keyTimes="0;0.4999;0.5;1" values="0;0;1;1"></animate>
+            </path>
+            <path d="M50 25L80 25L80 75L50 75" fill="#abbd81" stroke="#4e5c2e" stroke-width="3" stroke-linejoin="round"
+                  stroke-linecap="round">
+                <animate attributeName="d" dur="2.5s" repeatCount="indefinite" begin="0s" keyTimes="0;0.499;0.5;1"
+                         values="M50 25L20 25L20 75L50 75;M50 25L20 25L20 75L50 75;M50 25L50 20L50 80L50 75;M50 25L20 25L20 75L50 75">
+                </animate>
+                <animate attributeName="opacity" dur="2.5s" repeatCount="indefinite" begin="0s"
+                         keyTimes="0;0.4999;0.5;1"
+                         values="0;0;1;1"></animate>
+            </path>
+            <line fill="none" stroke-width="0.5" x1="50.06211" y1="23.85093" x2="49.93789" y2="76.39752" id="svg_2"
+                  stroke="#4e5c2e" />
+        </svg>
+    </div>
+}

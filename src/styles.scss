@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+@use './tailwind.css';
+@use './assets/layout/layout.scss';
+@use 'primeicons/primeicons.css';
+@use './assets/demo/demo.scss';
+
+$image-sizes: 50, 100, 150, 200;
+
+@each $size in $image-sizes {
+    .image-#{$size} {
+        height: #{$size}px !important;
+        width: #{$size}px !important;
+    }
+}
