@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
-import { SchoolService } from '@modules/school/services/school.service';
 import { BaseComponent } from '@core/components/base/base.component';
-import { School } from '@modules/school/models/school.model';
+import { Class } from '@modules/class/models/class.model';
 import { Pagination } from '@core/models/pagination.model';
 import { AppTitleService } from '@core/services/app.title.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -16,26 +15,36 @@ import { InputText } from 'primeng/inputtext';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputGroup } from 'primeng/inputgroup';
 import { InputGroupAddon } from 'primeng/inputgroupaddon';
+import { Select } from 'primeng/select';
+import { School } from '@modules/school/models/school.model';
+import { SelectItem } from '@core/models/select.item.model';
+import { SchoolService } from '@modules/school/services/school.service';
 import { Fluid } from 'primeng/fluid';
+import { StudentService } from '@modules/student/services/student.service';
 
 @Component({
-    selector: 'app-school-list',
-    imports: [Button, RouterLink, TableModule, ButtonDirective, TooltipModule, InputIcon, FloatLabel, InputText, ReactiveFormsModule, InputGroup, InputGroupAddon, FormsModule, Fluid],
-    templateUrl: './school.list.component.html',
-    styleUrl: './school.list.component.scss'
+    selector: 'app-student-list',
+    imports: [Button, RouterLink, TableModule, ButtonDirective, TooltipModule, InputIcon, FloatLabel, InputText, ReactiveFormsModule, InputGroup, InputGroupAddon, Select, FormsModule, Fluid],
+    templateUrl: './student.list.component.html',
+    styleUrl: './student.list.component.scss'
 })
-export class SchoolListComponent extends BaseComponent implements OnInit {
+export class StudentListComponent extends BaseComponent implements OnInit {
     query?: string;
+    schoolIdQuery?: number;
+
     pagination: Pagination = new Pagination();
     isFetchingData: boolean = false;
 
-    result?: School[];
+    result?: Class[];
+    schoolResult?: School[];
+    schoolSelectItemList?: SelectItem[] = [];
 
     get list() {
         return this.result ?? [];
     }
 
-    service = inject(SchoolService);
+    service = inject(StudentService);
+    schoolService = inject(SchoolService);
     cd = inject(ChangeDetectorRef);
     router = inject(Router);
     appConfirmationPopupService = inject(AppConfirmationPopupService);
@@ -49,13 +58,14 @@ export class SchoolListComponent extends BaseComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.getSchoolList();
         this.getData(this.setupPagination({}, this.pagination));
     }
 
     getData(pagination?: Pagination) {
         this.pagination = pagination || new Pagination();
-        this.subscriptions = this.service.getList(this.pagination, this.query).subscribe({
-            next: (response: School[]) => {
+        this.subscriptions = this.service.getList(this.pagination, this.query, this.schoolIdQuery).subscribe({
+            next: (response: Class[]) => {
                 this.result = response;
                 this.pagination = new Pagination({
                     pageNumber: this.pagination.pageNumber,
@@ -76,11 +86,28 @@ export class SchoolListComponent extends BaseComponent implements OnInit {
 
     refresh() {
         this.query = undefined;
+        this.schoolIdQuery = undefined;
         this.getData(this.pagination);
     }
 
     onLazyLoad(event: TableLazyLoadEvent) {
         this.getData(this.setupPagination(event, this.pagination));
+    }
+
+    getSchoolList() {
+        this.subscriptions = this.schoolService.getList({ asPage: false }).subscribe({
+            next: (response: School[]) => {
+                this.schoolResult = response;
+                this.schoolSelectItemList = response ? (this.schoolResult?.map((x) => new SelectItem(x.name, x.schoolId)) ?? []) : [];
+                // this.schoolSelectItemList = [new SelectItem("Search school", 0), ...this.schoolSelectItemList];
+            },
+            error: (error) => {
+                this.isFetchingData = false;
+            },
+            complete: () => {
+                this.isFetchingData = false;
+            }
+        });
     }
 
     deleteConfirmation(event: any, id: number): void {
@@ -104,8 +131,13 @@ export class SchoolListComponent extends BaseComponent implements OnInit {
         this.router.navigate(['create'], { relativeTo: this.route }).then();
     }
 
-    search(event?: any) {
-        this.query = event?.target?.value as string;
+    searchQuery(event: any) {
+        this.query = event?.target?.value;
+        this.getData(new Pagination(this.pagination));
+    }
+
+    searchBySchool(event: any) {
+        this.schoolIdQuery = event?.value;
         this.getData(new Pagination(this.pagination));
     }
 }

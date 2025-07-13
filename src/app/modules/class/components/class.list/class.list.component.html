@@ -24,7 +24,7 @@
         </div>
 
         <p-table [value]="list" [loading]="isFetchingData" [scrollable]="true"
-                 [rowsPerPageOptions]="[5, 10, 25, 50]" [paginator]="true" [lazyLoadOnInit]="true" [lazy]="true"
+                 [rowsPerPageOptions]="[5, 10, 25, 50]" [paginator]="true" [lazyLoadOnInit]="false" [lazy]="false"
                  (onLazyLoad)="onLazyLoad($event)"
                  [totalRecords]="pagination.totalRecord" [(first)]="pagination.first" [(rows)]="pagination.rows"
                  stripedRows

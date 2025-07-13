@@ -96,8 +96,8 @@ export class BaseComponent implements OnDestroy {
         }; */
 
         pagination = new Pagination({
-            first: event.first,
-            rows: event.rows || 0
+            first: event?.first || 0,
+            rows: event?.rows || 0
         });
 
         console.log(pagination);

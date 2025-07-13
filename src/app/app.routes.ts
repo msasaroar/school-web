@@ -19,6 +19,14 @@ export const appRoutes: Routes = [
                 path: 'classes',
                 loadChildren: () => import('./modules/class/class.routes')
             },
+            {
+                path: 'teachers',
+                loadChildren: () => import('./modules/teacher/teacher.routes')
+            },
+            {
+                path: 'students',
+                loadChildren: () => import('./modules/student/student.routes')
+            },
         ]
     },
     { path: 'accessdenied', redirectTo: '/auth/accessdenied', pathMatch: 'full' },

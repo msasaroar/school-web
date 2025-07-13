@@ -23,7 +23,7 @@ import { SchoolService } from '@modules/school/services/school.service';
 import { Fluid } from 'primeng/fluid';
 
 @Component({
-    selector: 'app-city-list',
+    selector: 'app-class-list',
     imports: [Button, RouterLink, TableModule, ButtonDirective, TooltipModule, InputIcon, FloatLabel, InputText, ReactiveFormsModule, InputGroup, InputGroupAddon, Select, FormsModule, Fluid],
     templateUrl: './class.list.component.html',
     styleUrl: './class.list.component.scss'
@@ -59,6 +59,7 @@ export class ClassListComponent extends BaseComponent implements OnInit {
 
     ngOnInit(): void {
         this.getSchoolList();
+        this.getData(this.setupPagination({}, this.pagination));
     }
 
     getData(pagination?: Pagination) {

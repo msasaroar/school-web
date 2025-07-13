@@ -1,0 +1,99 @@
+<p-fluid>
+    <div class="card">
+
+        <div class="ml-3 mr-3">
+
+            <div class="flex justify-between flex-wrap">
+                <div class="flex align-middle justify-center font-bold text-white rounded m-2">
+                    <h2>{{ pageHeader }}</h2>
+                </div>
+
+                <!-- <div class="flex align-baseline justify-center h-4rem text-white border-round m-2 gap-1">
+
+                    <p-button *ngIf="isEditPage;else createBtn" type="button" icon="pi pi-save"
+                        styleClass="p-button-raised p-button-warning p-button-sm" label="Update"
+                        (onClick)="updateFormDataConfirmation($event)"></p-button>
+                    <ng-template #createBtn>
+                        <p-button type="button" icon="pi pi-save" styleClass="p-button-raised p-button-success p-button-sm"
+                            label="Save" (onClick)="saveFormDataConfirmation($event)"></p-button>
+                    </ng-template>
+
+
+                    <p-button type="button" icon="pi pi-refresh" styleClass="p-button-raised p-button-info p-button-sm"
+                        label="Reset" (onClick)="resetFormData($event)"></p-button>
+                </div> -->
+
+                <div class="flex align-baseline justify-center rounded m-2 gap-1">
+                    <p-button type="button" icon="pi pi-refresh" styleClass="p-button-raised p-button-warn p-button-sm"
+                              label="Reset" (onClick)="resetFormData($event)" pTooltip="Reset"
+                              tooltipPosition="top"></p-button>
+
+
+                    @if (isEditPage) {
+                        <p-button type="button" icon="pi pi-save"
+                                  styleClass="p-button-raised p-button-info p-button-sm" label="Update"
+                                  (onClick)="updateFormDataConfirmation($event)" pTooltip="Update"
+                                  tooltipPosition="top"></p-button>
+                        <p-button type="button" icon="pi pi-save"
+                                  styleClass="p-button-raised p-button-info p-button-sm" label="Update & Exit"
+                                  (onClick)="updateFormDataConfirmation($event,true)" pTooltip="Update & Exit"
+                                  tooltipPosition="top"></p-button>
+                    } @else {
+                        <p-button type="button" icon="pi pi-save"
+                                  styleClass="p-button-raised p-button-primary p-button-sm"
+                                  label="Create" (onClick)="saveFormDataConfirmation($event)" pTooltip="Create"
+                                  tooltipPosition="top"></p-button>
+                        <p-button type="button" icon="pi pi-save"
+                                  styleClass="p-button-raised p-button-primary p-button-sm" label="Create & Exit"
+                                  (onClick)="saveFormDataConfirmation($event,true)" pTooltip="Create & Exit"
+                                  tooltipPosition="top"></p-button>
+                    }
+                </div>
+
+            </div>
+        </div>
+
+        <form [formGroup]="form">
+
+            <p-card>
+
+                <div class="flex flex-col gap-6 w-full mb-4">
+                    <div class="flex flex-col md:flex-row gap-6 w-full">
+                        <div class="flex flex-wrap gap-2 w-full">
+                            <p-select [options]="schoolSelectItemList" optionLabel="name" optionValue="code"
+                                      [filter]="true" [showClear]="true"
+                                      placeholder="Select School" formControlName="schoolId" class="w-full" />
+                            <form-error-message [fieldName]="'School'"
+                                                [control]="form.controls['schoolId']"></form-error-message>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-6 w-full mb-4">
+                    <!--                    <div class="font-semibold text-xl">Name</div>-->
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="flex flex-wrap gap-2 w-full">
+                            <p-floatlabel variant="on" class="w-full">
+                                <input pInputText id="name" pInputText formControlName="name" />
+                                <label for="name">Name</label>
+                            </p-floatlabel>
+                            <form-error-message [fieldName]="'Name'"
+                                                [control]="form.controls['name']"></form-error-message>
+                        </div>
+                        <div class="flex flex-wrap gap-2 w-full">
+                            <p-floatlabel variant="on" class="w-full">
+                                <input pInputText id="subject" pInputText formControlName="subject" />
+                                <label for="subject">Subject</label>
+                            </p-floatlabel>
+                            <form-error-message [fieldName]="'Subject'"
+                                                [control]="form.controls['subject']"></form-error-message>
+                        </div>
+                    </div>
+                </div>
+
+            </p-card>
+
+        </form>
+
+    </div>
+</p-fluid>

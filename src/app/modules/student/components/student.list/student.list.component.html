@@ -24,7 +24,7 @@
         </div>
 
         <p-table [value]="list" [loading]="isFetchingData" [scrollable]="true"
-                 [rowsPerPageOptions]="[1, 5, 10, 25, 50]" [paginator]="true" [lazyLoadOnInit]="false" [lazy]="false"
+                 [rowsPerPageOptions]="[5, 10, 25, 50]" [paginator]="true" [lazyLoadOnInit]="false" [lazy]="false"
                  (onLazyLoad)="onLazyLoad($event)"
                  [totalRecords]="pagination.totalRecord" [(first)]="pagination.first" [(rows)]="pagination.rows"
                  stripedRows
@@ -34,24 +34,30 @@
 
             <ng-template pTemplate="caption">
 
-                <p-inputgroup>
-                    <p-inputgroup-addon>
-                        <p-inputicon>
-                            <i class="pi pi-search"></i>
-                        </p-inputicon>
-                    </p-inputgroup-addon>
-                    <p-floatlabel variant="on">
-                        <input pInputText (input)="search($event)" [(ngModel)]="query" />
-                        <label>Search</label>
-                    </p-floatlabel>
-                </p-inputgroup>
+                <div class="flex gap-x-4 w-full">
+                    <p-select [options]="schoolSelectItemList" optionLabel="name" optionValue="code" [filter]="true"
+                              placeholder="Select School" class="w-full" [(ngModel)]="schoolIdQuery"
+                              (onChange)="searchBySchool($event)" [showClear]="true" />
+
+                    <p-inputgroup>
+                        <p-inputgroup-addon>
+                            <p-inputicon>
+                                <i class="pi pi-search"></i>
+                            </p-inputicon>
+                        </p-inputgroup-addon>
+                        <p-floatlabel variant="on">
+                            <input pInputText (input)="searchQuery($event)" [(ngModel)]="query" />
+                            <label>Search</label>
+                        </p-floatlabel>
+                    </p-inputgroup>
+                </div>
 
             </ng-template>
 
             <ng-template pTemplate="header">
                 <tr class="text-xl">
                     <th>Name</th>
-                    <th>Name Address</th>
+                    <th>Subject</th>
                     <!-- <th>Description EN</th>
                     <th>Description BN</th> -->
                     <th style="width: 120px;" alignFrozen="right" pFrozenColumn [frozen]="true">Action</th>
@@ -60,18 +66,18 @@
             <ng-template pTemplate="body" let-data>
                 <tr>
                     <td>{{ data.name }}</td>
-                    <td>{{ data.address }}</td>
+                    <td>{{ data.subject }}</td>
                     <td alignFrozen="right" pFrozenColumn [frozen]="true">
                         <div class="flex align-baseline justify-center border-round gap-1">
 
                             <a pButton icon="pi pi-eye" class="p-button-info p-button-sm" label="Details"
-                               [routerLink]="['details', data.schoolId]" pTooltip="Details" tooltipPosition="top"></a>
+                               [routerLink]="['details', data.studentId]" pTooltip="Details" tooltipPosition="top"></a>
 
                             <a pButton icon="pi pi-pencil" class="p-button-help p-button-sm" label="Edit"
-                               [routerLink]="['update', data.schoolId]" pTooltip="Edit" tooltipPosition="top"></a>
+                               [routerLink]="['update', data.studentId]" pTooltip="Edit" tooltipPosition="top"></a>
 
                             <p-button icon="pi pi-trash" styleClass="p-button-danger p-button-sm"
-                                      (onClick)="deleteConfirmation($event, data.schoolId)" pTooltip="Delete"
+                                      (onClick)="deleteConfirmation($event, data.studentId)" pTooltip="Delete"
                                       tooltipPosition="top"
                                       label="Delete"></p-button>
                         </div>
